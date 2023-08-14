@@ -1,4 +1,7 @@
 #include <httplib.h>
+#include <nlohmann/json.hpp>
+
+using json = nlohmann::json;
 
 class Server {
   public:
@@ -6,8 +9,14 @@ class Server {
 
   public:
     void routes(httplib::Server& server) {
-      server.Get("/hi", [](const httplib::Request &, httplib::Response &res) {
-        res.set_content("Hello World!", "text/plain");
+      server.Get("/", [](const httplib::Request &, httplib::Response &response) {
+        json data = {
+          { "message", "Hello world!" }
+        };
+
+        std::string parsed_data = data.dump();
+
+        response.set_content(parsed_data, "application/json");
       });
     }
 

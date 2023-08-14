@@ -1,5 +1,6 @@
 [requires]
 cpp-httplib/0.13.3
+nlohmann_json/3.11.2
 
 [generators]
 CMakeDeps
